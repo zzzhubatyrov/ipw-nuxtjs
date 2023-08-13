@@ -1,7 +1,7 @@
 .vacancies_item_block {
     display: flex;
     /*width: 815px;*/
-    width: calc(50% - 5.4rem);
+    width: calc(50% - 4.5rem);
     padding: 30px;
     flex-direction: column;
     justify-content: center;

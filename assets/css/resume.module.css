@@ -1,7 +1,7 @@
 .resume_item_block {
     display: inline-flex;
     /*width: 50%;*/
-    width: calc(50% - 5rem);
+    width: calc(50% - 5.4rem);
     justify-content: space-between;
     padding: 20px 30px;
     flex-direction: column;

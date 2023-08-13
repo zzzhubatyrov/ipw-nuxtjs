@@ -1,20 +1,29 @@
 <template>
   <div>
     <div class="wrapper">
-      <AppHeader />
-      <div class="container">
-        <nuxt-page />
-      </div>
+      <NuxtLayout>
+          <div class="container">
+              <NuxtPage />
+          </div>
+      </NuxtLayout>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import {defineComponent} from 'vue'
-import AppHeader from "~/layouts/AppHeader.vue";
 import ResumeComponent from "~/components/ResumeComponent.vue";
-defineComponent({
-  components: {AppHeader, ResumeComponent},
+import VacanciesComponent from "~/components/VacanciesComponent.vue";
+export default defineComponent({
+  components: {
+    ResumeComponent,
+    VacanciesComponent
+  },
+  head() {
+      definePageMeta({
+          layout: 'default'
+      })
+  },
 })
 </script>
 

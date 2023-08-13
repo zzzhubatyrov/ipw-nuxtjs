@@ -1,14 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+export default {
   devtools: { enabled: true },
-// @ts-ignore
   app: {
     head: {
-      title: 'IPW - Резюме и Вакансии'
+      title: 'IPW - Резюме и Вакансии',
     }
   },
-// @ts-ignore
   css: [
     '@/assets/css/style.css',
-  ]
-})
+  ],
+  ssr: true,
+  target: 'server',
+}

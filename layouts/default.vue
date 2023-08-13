@@ -7,4 +7,5 @@
       <nuxt-link to="/about">О нас</nuxt-link>
     </nav>
   </header>
+  <slot />
 </template>
