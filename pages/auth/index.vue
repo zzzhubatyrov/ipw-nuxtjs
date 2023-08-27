@@ -21,6 +21,7 @@
 
 <script lang="ts">
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default defineComponent({
   data() {
@@ -30,6 +31,11 @@ export default defineComponent({
       email: '',
       password: '',
       repeatPassword: ''
+    }
+  },
+  created() {
+    if (!Cookies.get('ipw_cookie')) {
+      this.$router.push('/profile')
     }
   },
   methods: {

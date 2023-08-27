@@ -49,9 +49,28 @@
 </template>
 
 <script lang="ts">
+import Cookies from 'js-cookie'
+export default defineComponent({
+  created() {
+    if (Cookies.get('ipw_cookie')) {
+      this.$router.push('/auth')
+    }
 
+  }
+})
 </script>
 
 <style scoped>
-@import "assets/css/profile.css";
+@import 'assets/css/profile.css';
+.block {
+  display: flex;
+  padding: 15px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 20px;
+  background: #FFF;
+  color: #000;
+}
 </style>

@@ -1,13 +1,36 @@
 <template>
-  <div class="centName">Здесь вы сможете создать своё Резюме!</div>
-  <div class="name">IT Professionals Work</div>
-  <nuxt-link class="btn" to="/auth">Регистрация / Авторизация</nuxt-link>
+  <div class="container">
+    <div class="centName">Здесь вы сможете создать своё Резюме!</div>
+    <div class="name">IT Professionals Work</div>
+    <nuxt-link class="btn" :to="linkToProfileOrAuth">{{ linkText }}</nuxt-link>
+  </div>
 </template>
 
 <script lang="ts">
+import Cookies from 'js-cookie'
+export default defineComponent({
+  computed: {
+    linkToProfileOrAuth() {
+      const isAuthenticated = Cookies.get("ipw_cookie");
+      return isAuthenticated ? "/profile" : "/auth";
+    },
+    linkText() {
+      return Cookies.get("ipw_cookie") ? "Регистрация / Авторизация" : "Профиль";
+    }
+  }
+})
 </script>
 
+
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 100%;
+  margin: 250px 0;
+}
 .centName {
   color: #FFF;
   font-family: Raleway, sans-serif;

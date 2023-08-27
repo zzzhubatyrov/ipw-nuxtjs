@@ -22,6 +22,7 @@
 </template>
 
 <script lang="ts">
+const { resume } = defineProps(['resume'])
 </script>
 
 <style module>

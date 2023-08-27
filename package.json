@@ -11,6 +11,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.17.1",
+    "js-cookie": "^3.0.5",
     "node-sass": "^9.0.0",
     "nuxt": "^3.6.5",
     "sass": "^1.64.2",
