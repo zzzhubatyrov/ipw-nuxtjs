@@ -2,7 +2,7 @@
   <div class="wrapper">
     <NuxtLayout>
       <div class="container">
-        <NuxtPage />
+        <NuxtPage/>
       </div>
     </NuxtLayout>
   </div>
@@ -15,13 +15,16 @@ import VacancyComponent from "~/components/VacancyComponent.vue";
 export default defineComponent({
   components: {
     ResumeComponent,
-    VacancyComponent
+    VacancyComponent,
   },
   head() {
-      definePageMeta({
-          layout: 'default'
-      })
+    definePageMeta({
+      layout: 'default',
+    })
   },
+  // setup() {
+  //   console.log("bongaclamms ^)")
+  // }
 })
 </script>
 
@@ -32,6 +35,7 @@ export default defineComponent({
   font-weight: 700;
   line-height: normal;
 }
+
 .container {
   display: flex;
   flex-direction: column;

@@ -2,21 +2,54 @@
   <div class="container">
     <div class="centName">Здесь вы сможете создать своё Резюме!</div>
     <div class="name">IT Professionals Work</div>
-    <nuxt-link class="btn" :to="linkToProfileOrAuth">{{ linkText }}</nuxt-link>
+    <NuxtLink class="btn" :to="linkToProfileOrAuth">{{ linkText }}</NuxtLink>
+  </div>
+  <div class="modal_window-notice" v-if="showNotice">
+    <NoticeComponent :closeModal="closeNotice"/>
   </div>
 </template>
 
 <script lang="ts">
 import Cookies from 'js-cookie'
+import {ref, defineComponent} from "vue";
+import UserDataComponent from "@/components/UserDataComponent.vue";
+import NoticeComponent from "~/components/NoticeComponent.vue";
+
 export default defineComponent({
+  UserDataComponent,
+  NoticeComponent,
+  setup() {
+    const showNotice = ref(true)
+    const closeNotice = () => {
+      showNotice.value = false
+    }
+    const checkVisited = () => {
+      const visited = localStorage.getItem("visited")
+      if (visited) {
+        showNotice.value = false
+      } else {
+        showNotice.value = true
+        localStorage.setItem("visited", "true")
+      }
+    }
+    onMounted(() => {
+      checkVisited()
+    })
+    return {
+      showNotice,
+      closeNotice
+    }
+  },
   computed: {
     linkToProfileOrAuth() {
-      const isAuthenticated = Cookies.get("ipw_cookie");
-      return isAuthenticated ? "/profile" : "/auth";
+      const isAuth = Cookies.get("ipwCookie")
+      return isAuth ? "/profile" : "/auth";
     },
     linkText() {
-      return Cookies.get("ipw_cookie") ? "Регистрация / Авторизация" : "Профиль";
+      const isAuth = Cookies.get("ipwCookie")
+      return isAuth ? "Профиль" : "Регистрация / Авторизация"
     }
+
   }
 })
 </script>
@@ -27,7 +60,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 25px;
   max-width: 100%;
   margin: 250px 0;
 }

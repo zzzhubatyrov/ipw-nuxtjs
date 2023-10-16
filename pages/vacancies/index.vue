@@ -1,5 +1,5 @@
 <template>
-  <ElasticsearchComponent/>
+<!--  <ElasticsearchComponent/>-->
   <div class="container">
     <section v-for="v in vacancies" :key="v.id">
       <VacancyComponent :vacancy="v" />

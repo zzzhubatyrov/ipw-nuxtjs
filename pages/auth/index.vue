@@ -1,78 +1,92 @@
 <template>
-  <form class="authForm" v-if="isLogin" @submit.prevent="login">
+  <form class="authForm" v-if="isLogin" @submit.prevent="loginHandler">
     <h1>Авторизация <span>/</span> Регистрация</h1>
-      <input type="email" v-model="email" placeholder="Почта" required>
-      <input type="password" v-model="password" placeholder="Пароль" required>
+    <input type="email" v-model="email" placeholder="Почта" required>
+    <input type="password" v-model="password" placeholder="Пароль" required>
     <button class="btn" type="submit">Войти</button>
-    <p>Нет аккаунта? <button class="btn" @click="switchForm">Зарегистрироваться</button></p>
+    <p>Нет аккаунта?
+      <button class="btn" @click="switchForm">Зарегистрироваться</button>
+    </p>
   </form>
 
   <!-- Форма регистрации -->
-  <form class="authForm" v-else @submit.prevent="register">
+  <form class="authForm" v-else @submit.prevent="registerHandler">
     <h1>Авторизация <span>/</span> Регистрация</h1>
-      <input type="text" v-model="name" placeholder="Имя / фамилия" required>
-      <input type="email" v-model="email" placeholder="E-mail" required>
-      <input type="password" v-model="password" placeholder="Пароль" required>
-      <input type="password" v-model="repeatPassword" placeholder="Повторите пароль" required>
+    <input type="text" v-model="name" placeholder="Имя / фамилия" required>
+    <input type="email" v-model="email" placeholder="E-mail" required>
+    <input type="password" v-model="password" placeholder="Пароль" required>
+    <input type="password" v-model="repeatPassword" placeholder="Повторите пароль" required>
     <button class="btn" type="submit">Зарегистрироваться</button>
-    <p>Уже есть аккаунт? <button class="btn" @click="switchForm">Войти</button></p>
+    <p>
+      Уже есть аккаунт?
+      <button class="btn" @click="switchForm">Войти</button>
+    </p>
   </form>
 </template>
 
-<script lang="ts">
-import axios from 'axios';
-import Cookies from 'js-cookie';
+<script setup lang="ts">
+import {ref, onMounted} from 'vue'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
-export default defineComponent({
-  data() {
-    return {
-      isLogin: true,
-      name: '',
-      email: '',
-      password: '',
-      repeatPassword: ''
-    }
-  },
-  created() {
-    if (!Cookies.get('ipw_cookie')) {
-      this.$router.push('/profile')
-    }
-  },
-  methods: {
-    async login() {
-      try {
-        const response = await axios.post('http://localhost:5000/auth/v1/login', {
-          email: this.email,
-          password: this.password
-        }, {
+const isLogin = ref(true)
+const login = ref('')
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const repeatPassword = ref('')
+const router = useRouter()
+
+const loginHandler = async () => {
+  try {
+    const response = await axios.post(
+        'http://localhost:5000/auth/v1/login',
+        {
+          email: email.value,
+          password: password.value
+        },
+        {
           withCredentials: true
-        })
-        console.log(response)
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    async register() {
-      const response = await axios.post('http://localhost:5000/auth/v1/register', {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        repeatPassword: this.password,
-      })
-      console.log(response)
-    },
-    switchForm() {
-      this.isLogin = !this.isLogin;
-    }
-  },
+        }
+    )
+    window.location.reload()
+    console.log(response)
+  } catch (e) {
+    console.log(e)
+  }
+}
+const registerHandler = async () => {
+  try {
+    const response = await axios.post(
+        'http://localhost:5000/auth/v1/register',
+        {
+          name: name.value,
+          email: email.value,
+          password: password.value,
+          repeatPassword: password.value
+        }, {withCredentials: false}
+    )
+    window.location.reload()
+    console.log(response)
+  } catch (e) {
+    console.log(e)
+  }
+}
+const switchForm = () => {
+  isLogin.value = !isLogin.value
+}
+onMounted(() => {
+  const isAuth = Cookies.get('ipwCookie')
+  if (isAuth) {
+    router.push('/profile')
+  }
 })
 </script>
 
 <style scoped>
 * {
   color: #000;
-  //text-align: center;
-  font-family: Inter, sans-serif;
+//text-align: center; font-family: Inter, sans-serif;
   font-style: normal;
   line-height: normal;
 }
@@ -94,6 +108,7 @@ h1 {
   border-radius: 30px;
   background: #FFF;
 }
+
 input {
   display: flex;
   width: 320px;
@@ -103,6 +118,7 @@ input {
   border: .8px solid rgba(0, 0, 0, 0.60);
   background: rgba(230, 230, 227, 0.40);
 }
+
 input::placeholder {
   color: rgba(0, 0, 0, 0.50);
   font-size: 12px;

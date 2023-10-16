@@ -1,86 +1,106 @@
-.resume_item_block {
-    display: inline-flex;
-    /*width: 50%;*/
-    width: calc(50% - 5.4rem);
-    justify-content: space-between;
+.resume_block {
+    display: flex;
+    width: 815px;
     padding: 20px 30px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    align-self: stretch;
-    border-radius: 10px;
+    border-radius: 20px;
     background: #FFF;
     color: #000;
 }
-.resume_item_header {
+
+.resume_header_block {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.resume_userInfo_block {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-}
-.resume_item_logo {
-    min-width: 80px;
-    min-height: 80px;
-    background: #D9D9D9;
-}
-.resume_item_userInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 2px;
-}
-.resume_item_userInfo_header {
-    display: flex;
     gap: 10px;
-    flex-wrap: wrap;
 }
-.resume_item_name, .resume_item_tag, .resume_item_levelDirection, .resume_item_location, .resume_item_userEmail,
-.resume_item_description {
-    font-family: Inter, sans-serif;
-    font-style: normal;
-    line-height: normal;
-    color: #000;
+
+.resume_logo {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background-color: #d9d9d9;
+    border-radius: 5px;
 }
-.resume_item_name {
+
+.resume_content_block {
+    display: flex;
+    padding: 5px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    align-self: stretch;
+}
+
+.resume_nameTag_block {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.resume_name {
     font-size: 16px;
     font-weight: 700;
 }
-.resume_item_tag {
+
+.resume_tag {
     color: rgba(0, 0, 0, 0.70);
     font-size: 14px;
     font-weight: 500;
 }
-.resume_item_levelDirection {
+
+.resume_secondInfo_block {
+    display: flex;
+    height: 65px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    align-self: stretch;
+}
+
+.resume_levelDirection {
     font-size: 24px;
     font-weight: 700;
+    color: #000;
 }
-.resume_item_location {
+
+.resume_locationWorkTime {
     font-size: 12px;
     font-weight: 500;
 }
-.resume_item_userEmail {
+
+.resume_email {
     font-size: 12px;
     font-weight: 500;
 }
-.resume_item_description {
-    font-size: 13px;
+
+.resume_salary {
+    font-size: 24px;
     font-weight: 500;
 }
-.resume_item_btnBlock {
+
+.resume_description_block {
     display: flex;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: #4E92F8;
+    align-items: flex-start;
+    gap: 10px;
 }
-.btnWrite {
-    color: #FFF;
-    text-align: center;
-    font-family: Inter, sans-serif;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+
+.resume_skills_block {
+
+}
+
+.resume_btnBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 }

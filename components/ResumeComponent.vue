@@ -1,30 +1,35 @@
 <template>
-  <div :class="$style.resume_item_block">
-    <div :class="$style.resume_item_header">
-      <div :class="$style.resume_item_logo"></div>
-      <div :class="$style.resume_item_userInfo">
-        <div :class="$style.resume_item_userInfo_header">
-          <div :class="$style.resume_item_name">Zhubatyrov Rodion</div>
-          <div :class="$style.resume_item_tag">@zzzhubatyrov</div>
+  <div :class="$style.resume_block">
+    <div :class="$style.resume_header_block">
+      <div :class="$style.resume_userInfo_block">
+        <div :class="$style.resume_logo"></div>
+        <div :class="$style.resume_content_block">
+          <div :class="$style.resume_nameTag_block">
+            <div :class="$style.resume_name">{{ resume.userName }}</div>
+            <div :class="$style.resume_tag">{{ resume.userTag }}</div>
+          </div>
+          <div :class="$style.resume_secondInfo_block">
+            <NuxtLink :to="`/resumes/${resume.id}`" :class="$style.resume_levelDirection">{{ resume.level }} {{ resume.direction }}</NuxtLink>
+            <div :class="$style.resume_locationWorkTime">{{ resume.location }} / {{ resume.status }}</div>
+            <div :class="$style.resume_email">{{ resume.userEmail }}</div>
+          </div>
         </div>
-        <div :class="$style.resume_item_levelDirection">Middle Golang Developer</div>
-        <div :class="$style.resume_item_location">Ufa / Full Day</div>
-        <div :class="$style.resume_item_userEmail">whqhub@bk.ru</div>
       </div>
+      <div :class="$style.resume_salary">{{ resume.salary }}</div>
     </div>
-    <div :class="$style.resume_item_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      Ad distinctio fugiat ipsam nihil odio officiis possimus qui repudiandae vero.
-      Soluta.</div>
-    <div :class="$style.resume_item_btnBlock">
-      <button class="btn" :class="$style.btnWrite">Написать</button>
+    <div :class="$style.resume_description_block">{{ resume.description }}</div>
+    <div :class="$style.resume_skills_block"></div>
+    <div :class="$style.resume_btnBlock">
+      <div class="btn" :class="$style.send">Написать</div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 const { resume } = defineProps(['resume'])
 </script>
 
 <style module>
 @import '@/assets/css/resume.module.css';
+@import 'assets/css/vacancy.module.css';
 </style>

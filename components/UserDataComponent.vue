@@ -9,10 +9,10 @@
       <input v-model="name" type="text" name="name" id="name" placeholder="прим. Иван Иванов">
       <label for="tag">Введите тэг</label>
       <input v-model="tag" type="text" name="tag" id="tag" placeholder="прим. @ipw">
-      <label for="age">Введите возраст</label>
-      <input v-model="age" type="text" name="age" id="age" placeholder="прим. 20">
+<!--      <label for="age">Введите возраст</label>-->
+<!--      <input v-model="age" type="text" name="age" id="age" placeholder="прим. 20">-->
       <label for="date">Введите дату рождения</label>
-      <input v-model="date" type="text" name="date" id="date" placeholder="прим. 01.01.1987">
+      <input v-model="birthday" type="text" name="date" id="date" placeholder="прим. 01.01.1987">
       <label for="location">Введите город</label>
       <input v-model="location" type="text" name="location" id="location" placeholder="прим. Уфа">
       <label for="gender">Выберите гендер</label>
@@ -26,7 +26,7 @@
     </form>
     <div class="footer">
       <div class="btnForm">
-        <button class="btn cancelBtn">Отмена</button>
+        <button class="btn cancelBtn" @click="closeModal">Отмена</button>
         <button class="btn saveBtn" @click="saveBtn">Сохранить</button>
       </div>
     </div>
@@ -37,10 +37,17 @@
 import axios from 'axios'
 import {ref} from 'vue'
 
+defineProps({
+  closeModal: {
+    type: Function,
+    required: true
+  }
+})
+
 const name = ref("")
 const tag = ref("")
 const age = ref("")
-const date = ref("")
+const birthday = ref("")
 const location = ref("")
 const gender = ref('')
 const number = ref("")
@@ -49,8 +56,8 @@ const saveBtn = async () => {
   try {
     const response = await axios.put('http://localhost:5000/data/v1/user/update',{
       tag: tag.value,
-      age: age.value,
-      date: date.value,
+      // age: age.value,
+      birthday: birthday.value,
       location: location.value,
       gender: gender.value,
       number: number.value,
@@ -60,12 +67,11 @@ const saveBtn = async () => {
   } catch (e) {
     console.log(e)
   }
-
 }
+
 
 </script>
 
 <style scoped>
 @import "assets/css/UserData.css";
-
 </style>
