@@ -1,91 +1,114 @@
 <template>
-  <div class="profile_block">
-    <div class="profile_block_left">
-      <div class="profile_block_left_container">
-        <div class="profile_photo"></div>
-        <div class="profile_user_info">
-          <div class="profile_user_info_secondBlock">
-            <button class="btn editBtn" @click="openModal">Редактировать</button>
-            <div class="profile_user_info_nameTag">
-              <div class="user_name">{{ userData.name }}</div>
-              <div class="user_tag">{{ userData.tag }}</div>
+  <div class="container">
+    <div class="container-head">
+      <div class="main-profile">
+        <img class="user-photo" alt="user-photo" :src="`data:image/jpeg;base64,${userData.photo}`" v-if="userData.photo != null">
+        <button class="btn user-photo" @click="openUploadModal" v-else><img src="./assets/img/camera.svg" alt="add-photo"></button>
+        <div class="user-dataBtn_block">
+          <div class="user-info">
+            <div class="user-nameEdit_block">
+              <h2 class="user-name">Donkey Lover</h2>
+              <button class="btn" @click="openModal"><img src="./assets/img/editBtnWhite.svg" alt="edit-btn"></button>
             </div>
-            <div class="profile_user_info_ageLocation">
-              <div class="user_age" v-if="userData.gender">{{ userData.gender }}, {{ Age }}</div>
-              <div class="user_location">{{ userData.location }}</div>
+            <div class="user-tagAgeGender_block">
+              <div class="user-tag"><img src="./assets/img/tag.svg" alt="tag">donkeylover</div>
+              <div class="user-ageGender">Мужчина, 20</div>
             </div>
-            <div class="profile_user_info_status">{{ userData.status }}</div>
+            <div class="user-locationStatus_block">
+              <div class="user-location"><img src="./assets/img/location.svg" alt="location">Нефтекамск</div>
+              <div class="user-status">не готов к переезду</div>
+            </div>
+            <div class="user-emailPhone_block">
+              <div class="user-email">worker@gmail.com</div>
+              <div class="user-phone"></div>
+            </div>
           </div>
-          <div class="profile_user_info_contacts">
-            <div class="user_email">{{ userData.email }}</div>
-            <div class="user_number">{{ userData.number }}</div>
+          <div class="btn-block">
+            <NuxtLink class="btn employee" to="/employer">Работодателям</NuxtLink>
+            <button class="btn download-cv disable">Скачать CV</button>
           </div>
         </div>
-        <div class="profile_btn_block">
-          <button class="btn success disable">Скачать CV</button>
-          <NuxtLink class="btn success" to="/employer">Работодателям</NuxtLink>
-        </div>
-      </div>
-      <div class="profile_leftBlock_footer">
-        <button class="btn logoutBtn" @click="logoutHandler">Выйти</button>
-        <div class="brand">itprofessionalswork</div>
+        <!--        <div class="user-social"></div>-->
       </div>
     </div>
-    <div class="profile_block_right">
-      <div class="block about_me">
-        <button class="btn editBtn_blockRight" @click="editMode = true" v-if="!editMode">Редактировать</button>
-        <button class="btn saveBtn_blockRight" @click="saveDescription" v-if="editMode">Сохранить</button>
-        <div class="about_me_header">Обо мне</div>
-        <div class="about_me_content" v-if="!editMode">{{ userData.description }}</div>
-        <div v-else><textarea v-model="newDescription"></textarea></div>
+    <div class="container-content">
+      <div class="about-me_block">
+        <div class="about-me_head">
+          <h2>Обо мне</h2>
+          <button class="btn"><img src="./assets/img/editBtn.svg" alt="edit-btn"></button>
+        </div>
+        <div class="about-me_content"></div>
       </div>
-<!--      <div class="block education">-->
-<!--        <button class="btn editBtn_blockRight" @click="openModal">Редактировать</button>-->
-<!--        <div class="education_header">Образование</div>-->
-<!--        <div class="education_content"></div>-->
-<!--      </div>-->
-<!--      <div class="block experience">-->
-<!--        <button class="btn editBtn_blockRight" @click="openModal">Редактировать</button>-->
-<!--        <div class="experience_header">Опыт работы</div>-->
-<!--        <div class="experience_content"></div>-->
-<!--      </div>-->
-      <div class="block resume">
-        <NuxtLink class="btn editBtn_blockRight" to="/create-resume">Добавить резюме</NuxtLink>
-        <div class="resume_header">Резюме</div>
-        <div class="resume_content">
-          <div class="resume_item" v-for="resumeItem in userDataResumes">
+      <div class="second-content_block">
+        <div class="education-block">
+          <div class="education-head">
+            <h2>Образование</h2>
+            <button class="btn"><img src="./assets/img/editBtn.svg" alt="edit-btn"></button>
+          </div>
+          <div class="education-content"></div>
+        </div>
+        <div class="experience-block">
+          <div class="experience-head">
+            <h2>Опыт работы</h2>
+            <button class="btn"><img src="./assets/img/editBtn.svg" alt="edit-btn"></button>
+          </div>
+          <div class="experience-content"></div>
+        </div>
+      </div>
+      <div class="resume-block">
+        <div class="resume-header">
+          <h2>Резюме</h2>
+          <NuxtLink class="btn" to="/create-resume">
+            <img src="./assets/img/editBtn.svg" alt="add-resume">
+          </NuxtLink>
+        </div>
+        <div class="resume-content">
+          <div class="resume-item" v-for="resumeItem in userDataResumes">
             <p>delete</p>
             <ProfileResumeComponent :profileResumeData="resumeItem" />
           </div>
         </div>
+      </div>
+      <div class="stack-block">
+        <div class="stack-head">
+          <h2>Стэк</h2>
+          <button class="btn"><img src="./assets/img/editBtn.svg" alt="edit-btn"></button>
+        </div>
+        <div class="stack-content"></div>
       </div>
     </div>
   </div>
   <div class="modal" v-if="showModal">
     <UserDataComponent :closeModal="closeModal"/>
   </div>
+  <div class="modal" v-if="uploadModal">
+    <UploadPhotoComponent :closeUploadModal="closeUploadModal" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import Cookies from "js-cookie";
-import axios from "axios";
 import UserDataComponent from "~/components/UserDataComponent.vue";
+import HrProfileComponent from "~/pages/profile/components/HrProfileComponent.vue";
 import ProfileResumeComponent from "~/pages/profile/components/ProfileResumeComponent.vue";
+import UploadPhotoComponent from "~/pages/profile/components/UploadPhotoComponent.vue";
+import {ref} from "vue";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const router = useRouter()
-const showModal = ref(false)
 const userData = ref([])
+const companyData = ref([])
 let Age = ref()
 const userDataResumes = ref([])
-const editMode = ref(false)
 const newDescription = ref("")
 let currentDate = new Date()
+let userRole = ref('')
 
 const saveDescription = async () => {
   try {
     const res = await axios.put('http://localhost:5000/data/v1/user/update', {
-        description: newDescription.value,
-      }, {
+      description: newDescription.value,
+    }, {
       withCredentials: true
     })
     console.log(res)
@@ -93,14 +116,11 @@ const saveDescription = async () => {
     console.log(e)
   }
 }
-
 onMounted(async () => {
   try {
     const res = await axios.get('http://localhost:5000/data/v1/user', {withCredentials: true})
     userData.value = res.data
     userDataResumes.value = res.data.resumes
-    // console.log(userData.value)
-    // console.log(userDataResumes.value)
     const date = userData.value.birthday.replace(/\./g, '-')
     const new_date = date.split('-').reverse().join('-')
     const birth = new Date(new_date)
@@ -110,7 +130,9 @@ onMounted(async () => {
       age--;
     }
     Age.value = age
-    // console.log(res.data)
+    userRole.value = userData.value.role.role_name
+    console.log(userRole.value)
+    console.log(res.data)
     if (!userData.value.gender) {
       showModal.value = true;
     }
@@ -119,12 +141,16 @@ onMounted(async () => {
     console.log(e)
   }
 })
-const openModal = () => {
-  showModal.value = true
-}
-const closeModal = () => {
-  showModal.value = false
-}
+
+onMounted(async () => {
+  try {
+    const res = await axios.get('http://localhost:5000/data/v1/user', {withCredentials: true})
+    companyData.value = res.data.company
+    console.log(companyData.value)
+  } catch (e) {
+    console.log(e)
+  }
+})
 const logoutHandler = async () => {
   try {
     await axios.post('http://localhost:5000/auth/v1/logout')
@@ -144,38 +170,35 @@ onMounted(() => {
   }
 })
 defineComponent({
-  UserDataComponent
+  UserDataComponent,
+  HrProfileComponent,
+  ProfileResumeComponent,
+  UploadPhotoComponent
 })
+
+const showModal = ref(false)
+const uploadModal = ref(false)
+const openModal = () => {
+  showModal.value = true
+}
+const closeModal = () => {
+  showModal.value = false
+}
+
+const openUploadModal = () => {
+  uploadModal.value = true
+}
+const closeUploadModal = () => {
+  uploadModal.value = false
+}
+
 </script>
 
 <style scoped>
 @import 'assets/css/profile.css';
 
-.block {
-  display: flex;
-  padding: 15px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  align-self: stretch;
-  border-radius: 20px;
-  background: #FFF;
-  color: #000;
-}
-
-.modal_window {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
-}
-.editBtn_blockRight, .saveBtn_blockRight {
-  color: #000;
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0;
 }
 </style>

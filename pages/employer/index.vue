@@ -1,48 +1,88 @@
 <template>
-  <div>
-    <h1>Создание компании</h1>
-    <form>
-      <label for="company-name">Название компании:</label>
-      <input type="text" id="company-name" v-model="companyName">
+  <div class="container">
+    <div class="create-company_block">
+      <h2 class="create-company_head">Создание профиля компании</h2>
+      <div class="create-company_content">
+        <form class="create-company_form" enctype="multipart/form-data" @submit.prevent="createCompanyHandler">
 
-      <label for="company-description">Описание компании:</label>
-      <textarea id="company-description" v-model="companyDescription"></textarea>
-
-      <label for="company-location">Местоположение:</label>
-      <input type="text" id="company-location" v-model="companyLocation">
-
-      <label for="company-website">Веб-сайт:</label>
-      <input type="text" id="company-website" v-model="companyWebsite">
-
-      <label for="company-email">Email:</label>
-      <input type="email" id="company-email" v-model="companyEmail">
-
-      <label for="company-phone">Телефон:</label>
-      <input type="tel" id="company-phone" v-model="companyPhone">
-
-      <button @click="createCompany">Создать</button>
-    </form>
+          <!--          <label for="photo" v-if="showUpLoad" ref="fileInput" class="logo"-->
+          <!--                 style="display:flex; align-items: center; justify-content: center">-->
+          <!--            <img src="@/assets/img/camera.svg" alt="add-photo"/>-->
+          <!--            <input class="logo" type="file" ref="fileInput2" name="photo" id="photo" @change="handleFileChange"/>-->
+          <!--          </label>-->
+<!--          <input ref="fileInput" type="file" name="photo" id="photo"/>-->
+          <input type="text" v-model="companyName" placeholder="Название компании">
+          <input type="text" v-model="companyTag" placeholder="Тэг компании">
+          <textarea placeholder="Описание компании" v-model="companyDescription"></textarea>
+          <input type="text" v-model="companyLocation" placeholder="Местоположение">
+          <input type="text" v-model="companyWebSite" placeholder="Веб-сайт">
+          <input type="email" v-model="companyEmail" placeholder="Email">
+          <input type="text" v-model="companyPhone" placeholder="Телефон">
+          <button class="btn success" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal" v-if="uploadModal">
+    <UploadPhotoComponent :closeUploadModal="closeUploadModal"/>
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue'
-export default defineComponent ({
-  data() {
-    return {
-      companyName: '',
-      companyDescription: '',
-      companyLocation: '',
-      companyWebsite: '',
-      companyEmail: '',
-      companyPhone: ''
-    }
-  },
-  methods: {
-    createCompany() {
-      // код для создания компании на сервере
-      alert("Компания успешно создана!");
-    }
+<script setup>
+import {ref} from 'vue'
+import axios from "axios";
+import UploadPhotoComponent from './components/UploadPhotoComponent.vue'
+
+let companyName = ref('')
+let companyTag = ref('')
+let companyDescription = ref('')
+let companyLocation = ref('')
+let companyWebSite = ref('')
+let companyEmail = ref('')
+let companyPhone = ref('')
+const router = useRouter()
+
+const createCompanyHandler = async () => {
+  try {
+    const res = await axios.post('http://localhost:5000/data/v1/user/create-company', {
+      name: companyName.value,
+      tag: companyTag.value,
+      email: companyEmail.value,
+      phone: companyPhone.value,
+      location: companyLocation.value,
+      description: companyDescription.value,
+    }, {withCredentials: true, headers: {"Content-Type": "multipart/form-data"}})
+    console.log(res)
+    router.push('/profile')
+  } catch (e) {
+    console.log(e)
   }
+}
+const uploadModal = ref(false)
+const openUploadModal = () => {
+  uploadModal.value = true
+}
+const closeUploadModal = () => {
+  uploadModal.value = false
+}
+
+let imagePreviewURL = ref(null)
+let showUpLoad = ref(true)
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    imagePreviewURL.value = reader.result;
+    showUpLoad.value = false
+  };
+  reader.readAsDataURL(file);
+}
+
+defineComponent({
+  UploadPhotoComponent
 })
 </script>
+
+<style scoped>
+@import "./assets/css/style.css";
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="user-data_component">
     <div class="userData_header">
       <h1 class="fillData">Заполните данные</h1>
       <h3 class="fillData_second">Осталось совсем немного</h3>
@@ -9,8 +9,6 @@
       <input v-model="name" type="text" name="name" id="name" placeholder="прим. Иван Иванов">
       <label for="tag">Введите тэг</label>
       <input v-model="tag" type="text" name="tag" id="tag" placeholder="прим. @ipw">
-<!--      <label for="age">Введите возраст</label>-->
-<!--      <input v-model="age" type="text" name="age" id="age" placeholder="прим. 20">-->
       <label for="date">Введите дату рождения</label>
       <input v-model="birthday" type="text" name="date" id="date" placeholder="прим. 01.01.1987">
       <label for="location">Введите город</label>
@@ -37,6 +35,7 @@
 import axios from 'axios'
 import {ref} from 'vue'
 
+
 defineProps({
   closeModal: {
     type: Function,
@@ -46,7 +45,6 @@ defineProps({
 
 const name = ref("")
 const tag = ref("")
-const age = ref("")
 const birthday = ref("")
 const location = ref("")
 const gender = ref('')
@@ -56,7 +54,6 @@ const saveBtn = async () => {
   try {
     const response = await axios.put('http://localhost:5000/data/v1/user/update',{
       tag: tag.value,
-      // age: age.value,
       birthday: birthday.value,
       location: location.value,
       gender: gender.value,

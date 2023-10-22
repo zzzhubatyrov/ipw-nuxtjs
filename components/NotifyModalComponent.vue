@@ -23,9 +23,6 @@ defineProps({
 </script>
 
 <style scoped>
-.btn {
-  color: #000;
-}
 
 .container {
   display: flex;

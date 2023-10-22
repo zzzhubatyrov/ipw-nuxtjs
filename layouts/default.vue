@@ -5,7 +5,7 @@
       <button class="header_notification" @click="openModal">notify</button>
     </div>
     <nav class="navbar">
-      <div v-if="route.path != '/' && route.path != '/profile'">
+      <div v-if="route.path != '/' && route.path != '/profile' && route.path != '/auth'">
         <NuxtLink class="btn" to="/profile">Профиль</NuxtLink>
       </div>
       <NuxtLink to="/messenger">Чат</NuxtLink>
@@ -35,7 +35,6 @@ defineComponent({
 let isActive = ref(true)
 
 const route = useRoute()
-console.log(route.path)
 
 let showModal = ref(false)
 const openModal = () => {

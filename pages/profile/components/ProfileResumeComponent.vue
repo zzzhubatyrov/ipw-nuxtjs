@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 const {profileResumeData} = defineProps(["profileResumeData"])
-// console.log(profileResumeData)
 </script>
 
 <style scoped>
