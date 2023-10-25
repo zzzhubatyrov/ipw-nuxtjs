@@ -10,7 +10,7 @@
           <!--            <img src="@/assets/img/camera.svg" alt="add-photo"/>-->
           <!--            <input class="logo" type="file" ref="fileInput2" name="photo" id="photo" @change="handleFileChange"/>-->
           <!--          </label>-->
-<!--          <input ref="fileInput" type="file" name="photo" id="photo"/>-->
+          <input type="file" id="photo" @change="handlePhotoUpload" accept="image/*">
           <input type="text" v-model="companyName" placeholder="Название компании">
           <input type="text" v-model="companyTag" placeholder="Тэг компании">
           <textarea placeholder="Описание компании" v-model="companyDescription"></textarea>
@@ -40,18 +40,25 @@ let companyLocation = ref('')
 let companyWebSite = ref('')
 let companyEmail = ref('')
 let companyPhone = ref('')
+let companyPhoto = ref(null)
 const router = useRouter()
 
+const handlePhotoUpload = (event) => {
+  companyPhoto.value = event.target.files[0];
+}
+
 const createCompanyHandler = async () => {
+  const formData = new FormData()
+  formData.append("name", companyName.value)
+  formData.append("photo", companyPhoto.value)
+  formData.append("tag", companyTag.value)
+  formData.append("email", companyEmail.value)
+  formData.append("phone", companyPhone.value)
+  formData.append("location", companyLocation.value)
+  formData.append("description", companyDescription.value)
   try {
-    const res = await axios.post('http://localhost:5000/data/v1/user/create-company', {
-      name: companyName.value,
-      tag: companyTag.value,
-      email: companyEmail.value,
-      phone: companyPhone.value,
-      location: companyLocation.value,
-      description: companyDescription.value,
-    }, {withCredentials: true, headers: {"Content-Type": "multipart/form-data"}})
+    const res = await axios.post('http://localhost:5000/data/v1/user/create-company',
+      formData, {withCredentials: true, headers: {"Content-Type": "multipart/form-data"}})
     console.log(res)
     router.push('/profile')
   } catch (e) {

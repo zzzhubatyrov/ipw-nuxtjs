@@ -51,18 +51,4 @@ const closeModal = () => {
   align-items: center;
   gap: 20px;
 }
-.btn {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color:#fff;
-
-  display: flex;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-
-  background-color: #325181;
-  border-radius: 12px;
-}
 </style>

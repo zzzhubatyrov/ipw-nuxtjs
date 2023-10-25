@@ -1,36 +1,51 @@
 <template>
   <div class="container">
-    <div class="vacancy_header">
-      <div class="vacancy_info_block">
-        <div class="vacancyNameLocation_block">
-          <h2 class="vacancy_name">{{ vacancy.level }} {{ vacancy.direction }}</h2>
-          <h4 class="vacancy_salary">до 100 000 Р на руки</h4>
-          <h4 class="vacancy_experience">Требуемый опыт работы: 1-3 года</h4>
-          <h4 class="vacancy_workTime">{{ vacancy.workTime }}</h4>
+    <div class="container-head">
+      <div class="company">
+        <img class="logo" :src="`data:image/jpeg;base64,${companyData.photo}`" alt="logo" />
+        <div class="company-data">
+          <div class="name">{{ companyData.name }}</div>
+          <div class="location">{{ companyData.location }}</div>
+          <div class="company-btn_block">
+            <button class="btn about-company_btn">Подробнее</button>
+          </div>
         </div>
-        <div class="skills_block">
-          <h2 class="skills_block_head">Ключевые навыки</h2>
-          <div class="skills_item_block">
-            <div class="skill_item" v-for="skill_item in skills">
-              {{ skill_item }}
+      </div>
+      <div class="main-vacancy">
+        <div class="skills-block">
+          <div class="skills-head">Ключевые навыки</div>
+          <div class="skills-content">
+            <div class="skill-item" v-for="skill in skills">
+              {{ skill }}
             </div>
           </div>
         </div>
-        <div class="companyNameTagLogo_block">
-          <div class="companyNameTag_block">
-            <h2 class="companyName">{{ vacancy.companyName }} <span>{{ vacancy.companyTag }}</span></h2>
-            <h3 class="companyLocation">{{ vacancy.location }}</h3>
+        <div class="vacancy-info">
+          <div class="vacancy-data">
+            <div class="vacancy-titleSalary_block">
+              <div class="vacancy-title">{{ vacancy.level }} {{ vacancy.direction }}</div>
+              <div class="vacancy-salary">до {{ vacancy.salary }} ₽ на руки</div>
+            </div>
+            <div class="employment-exp_block">
+              <div class="vacancy-description-item">Требуемый опыт: <span>{{ vacancy.experience }}</span></div>
+              <div class="vacancy-description-item">{{ vacancy.workTime }}</div>
+            </div>
           </div>
-          <div class="vacancy_logo"></div>
+          <button class="btn success req-btn">Откликнуться</button>
         </div>
       </div>
-      <div class="vacancy_btnBlock"></div>
     </div>
-    <div class="vacancy_descriptionBlock">
-      <h2 class="vacancy_descriptionBlock_head">О компании:</h2>
-      <div class="vacancy_descriptionBlock_content">
-        {{ vacancy.description }}
+    <div class="container-content">
+      <div class="about-company_block">
+        <h2 class="about-company_head">О компании</h2>
+        <div class="about-company_content">
+          {{ vacancy.description }}
+        </div>
       </div>
+<!--      <div class="company-vacancies_block">-->
+<!--        <h2 class="company-vacancies_head">Больше вакансий этой компании</h2>-->
+<!--        <div class="company-vacancies_content"></div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -42,8 +57,10 @@ export default defineComponent({
   setup() {
     const { id } = useRoute().params
     const uri = 'http://localhost:5000/vacancy/v1/' + id
+    const company_uri = 'http://localhost:5000/company/v1/' + id
     const vacancy = ref([]);
     const skills = ref([])
+    const companyData = ref([])
     onMounted(async () => {
       try {
         const response = await axios.get(uri);
@@ -51,11 +68,22 @@ export default defineComponent({
         skills.value = vacancy.value.skills.split(" ")
         console.log(vacancy.value)
         console.log(skills.value)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error);
+      }
+    });
+    onMounted(async () => {
+      try {
+        const response = await axios.get(company_uri);
+        companyData.value = response.data
+        console.log(companyData.value)
       } catch (error) {
         console.error(error);
       }
     });
     return {
+      companyData,
       vacancy,
       skills,
     };
@@ -64,7 +92,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "assets/css/vacancyPage.css";
+@import "./assets/css/vacancies-[id].css";
+* {
+  font-family: Inter, sans-serif;
+}
 h1, h2, h3, h4 {
   margin: 0;
   padding: 0;

@@ -12,7 +12,7 @@
     "@nuxt/devtools": "latest",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "^18.17.1",
-    "nuxt": "^3.6.5"
+    "nuxt": "^3.8.0"
   },
   "dependencies": {
     "@nuxt/types": "^2.17.1",

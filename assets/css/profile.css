@@ -10,6 +10,8 @@
     display: flex;
     align-items: flex-start;
     gap: 50px;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .main-profile {
@@ -345,4 +347,55 @@
     align-items: center;
     gap: 10px;
     align-self: stretch;
+}
+
+.company {
+    display: flex;
+    padding: 60px 61px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 40px;
+    background: #FFF;
+    color: #000;
+}
+
+.logo {
+    width: 210px;
+    height: 210px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+}
+
+.company-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.company-name {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.company-location {
+    display: flex;
+    align-items: center;
+    color: #B1B1B1;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.company-about_btn {
+    display: flex;
+    padding: 10px 30px;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
 }
