@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/js-cookie": "^3.0.3",
+    "@types/node": "^18.17.1",
+    "nuxt": "^3.8.0"
+  },
+  "dependencies": {
+    "@nuxt/types": "^2.17.1",
+    "axios": "^1.5.1",
+    "cookie-universal-nuxt": "^2.2.2",
+    "js-cookie": "^3.0.5"
+  }
+}
