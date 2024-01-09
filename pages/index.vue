@@ -14,7 +14,6 @@ import Cookies from 'js-cookie'
 import {ref, defineComponent} from "vue";
 import UserDataComponent from "@/components/UserDataComponent.vue";
 import NoticeComponent from "~/components/NoticeComponent.vue";
-
 export default defineComponent({
   UserDataComponent,
   NoticeComponent,
@@ -42,14 +41,13 @@ export default defineComponent({
   },
   computed: {
     linkToProfileOrAuth() {
-      const isAuth = Cookies.get("ipwCookie")
+      const isAuth = Cookies.get("ipw")
       return isAuth ? "/profile" : "/auth";
     },
     linkText() {
-      const isAuth = Cookies.get("ipwCookie")
+      const isAuth = Cookies.get("ipw")
       return isAuth ? "Профиль" : "Регистрация / Авторизация"
     }
-
   }
 })
 </script>
@@ -59,10 +57,11 @@ export default defineComponent({
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 25px;
-  max-width: 100%;
-  margin: 250px 0;
+  width: 100%;
+  height: calc(100vh - 80px);
 }
 .centName {
   color: #FFF;
@@ -73,10 +72,11 @@ export default defineComponent({
   line-height: normal;
 }
 .name {
+  font-family: Raleway, sans-serif;
   font-size: 64px;
 }
 .btn {
-  font-family: 'Raleway', sans-serif;
+  font-family: Raleway, sans-serif;
   font-weight: 700;
   font-size: 18px;
   padding: 16px 84px;

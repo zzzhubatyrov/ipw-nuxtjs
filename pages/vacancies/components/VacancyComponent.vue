@@ -1,22 +1,22 @@
 <template>
-  <div :class="$style.vacancies_item_block">
-    <div :class="$style.vacancies_item_header">
-      <div :class="$style.vacancies_item_logo"></div>
-      <div :class="$style.vacancies_item_vacanciesInfo">
-        <div :class="$style.vacancies_item_vacanciesInfo_header">
-          <div :class="$style.vacancies_item_name">{{ vacancy.companyName }}</div>
-          <div :class="$style.vacancies_item_tag">{{ vacancy.companyTag }}</div>
+  <div class="vacancies_item_block">
+    <div class="vacancies_item_header">
+      <img class="vacancies_item_logo" :src="`data:image/jpeg;base64,${vacancy.companyPhoto}`" alt="company-photo">
+      <div class="vacancies_item_vacanciesInfo">
+        <div class="vacancies_item_vacanciesInfo_header">
+          <NuxtLink class="vacancies_item_name" :to="`/company/${vacancy.companyID}`">{{ vacancy['companyName'] }}</NuxtLink>
+          <div class="vacancies_item_tag">{{ vacancy['companyTag'] }}</div>
         </div>
-        <NuxtLink :to="`/vacancies/${vacancy.id}`" :class="$style.vacancies_item_levelDirection">{{ vacancy.level }} {{ vacancy.direction }}</NuxtLink>
-        <div :class="$style.vacancies_item_location">{{ vacancy.location }} / {{ vacancy.workTime }}</div>
+        <NuxtLink :to="`/vacancies/${vacancy.id}`" class="vacancies_item_levelDirection">{{ vacancy['level'] }} {{ vacancy['direction'] }}</NuxtLink>
+        <div class="vacancies_item_location">{{ vacancy['location'] }} / {{ vacancy['workTime'] }}</div>
         <!-- <div class="vacancies_item_levelDirection"></div> ?? >> email -->
       </div>
     </div>
-    <div :class="$style.vacancies_item_description">{{ vacancy.description }}</div>
-    <div :class="$style.vacancies_item_skills">{{ vacancy.skills }}</div>
-    <div :class="$style.vacancies_item_btnBlock">
-      <button class="btn" :class="$style.send">Откликнуться</button>
-      <button class="btn" :class="$style.success">Вы уже откликнулись</button>
+    <div class="vacancies_item_description">{{ vacancy['description'] }}</div>
+    <div class="vacancies_item_skills">{{ vacancy['skills'] }}</div>
+    <div class="vacancies_item_btnBlock">
+      <button class="btn send">Откликнуться</button>
+      <button class="btn success">Вы уже откликнулись</button>
     </div>
   </div>
 </template>
@@ -25,6 +25,6 @@
 const { vacancy } = defineProps(['vacancy'])
 </script>
 
-<style module>
-@import 'assets/css/vacancy.module.css';
+<style scoped>
+@import '../assets/css/vacancy-component.css';
 </style>

@@ -12,9 +12,9 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import axios from 'axios'
-import { defineProps, ref } from 'vue'
+import { defineComponent, ref, defineEmits } from 'vue'
 
 defineProps({
   closeUploadModal: {
@@ -22,18 +22,38 @@ defineProps({
     required: true
   }
 })
+
 const fileInput = ref(null)
+const formData = new FormData()
+const data = ref("")
+
+const isValidImage = (imageType) => {
+  const validFormats = ['image/jpeg', 'image/png'];
+  return validFormats.includes(imageType);
+};
 const uploadPhoto = async () => {
-  const formData = new FormData()
-  formData.append('photo', fileInput.value.files[0])
+  const file = fileInput.value.files[0]
+  if (file) {
+    if (isValidImage(file['type'])) {
+      formData.append('photo', file);
+      data.value = file['type'];
+    } else {
+      throw new Error("Неверный формат файла")
+    }
+  }
   try {
-    const response = await axios.put('http://localhost:5000/data/v1/user/upload-photo', formData, { withCredentials: true })
-    console.log(response.data)
+    await axios.put('http://localhost:5000/data/v1/user/upload-photo', formData, { withCredentials: true })
     window.location.reload()
   } catch (e) {
     console.log(e)
   }
+  emitValue(data.value)
 }
+const emit = defineEmits(['value'])
+const emitValue = (value) => {
+  emit('value', value)
+}
+
 </script>
 
 <style scoped>

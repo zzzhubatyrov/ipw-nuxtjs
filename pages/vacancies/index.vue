@@ -10,13 +10,15 @@
 <script lang="ts">
 import {defineComponent, ref, onMounted} from "vue";
 import axios from "axios";
-
+import VacancyComponent from "~/pages/vacancies/components/VacancyComponent.vue";
 export default defineComponent({
+  components: {VacancyComponent},
+  VacancyComponent,
   setup() {
     const vacancies = ref([]);
     onMounted(async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vacancy/v1/all-vacancies");
+        const response = await axios.get(`http://localhost:5000/vacancy/v1/all-vacancies`);
         vacancies.value = response.data;
         console.log(vacancies.value)
       } catch (error) {
@@ -34,6 +36,8 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
+  height: calc(100vh - 20px);
 }
 section {
   width: calc(50% - .7rem);

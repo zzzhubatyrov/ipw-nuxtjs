@@ -3,30 +3,36 @@
 body {
     margin: 0;
     padding: 0;
-    background: rgb(119,160,252);
+    background: rgb(119, 160, 252);
     background: linear-gradient(90deg, rgba(119,160,252,1) 0%, rgba(31,106,233,1) 100%);
+    background-size: cover;
     color: #fff;
 }
 
-::-webkit-scrollbar {
-    width: 7px;
-    height: 5px;
-    background-color: #F5F5F5;
+@media (max-width: 100px) {
+    background: rgb(119,160,252);
+    background: linear-gradient(192deg, rgba(0, 102, 255, 0.78) 0%, rgba(99, 161, 255, 0.78) 100%) no-repeat;
 }
-::-webkit-scrollbar-track {
-    background: none;
-}
-::-webkit-scrollbar-thumb {
-    background: #C0C0C0;
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #A9A9A9;
-}
-::-webkit-scrollbar-thumb {
-    -webkit-transition: background 0.3s;
-    transition: background 0.3s;
-}
+
+/*::-webkit-scrollbar {*/
+/*    width: 7px;*/
+/*    height: 5px;*/
+/*    background-color: #F5F5F5;*/
+/*}*/
+/*::-webkit-scrollbar-track {*/
+/*    background: none;*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+/*    background: #C0C0C0;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: #A9A9A9;*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+/*    -webkit-transition: background 0.3s;*/
+/*    transition: background 0.3s;*/
+/*}*/
 
 a {
     color: #fff;
@@ -55,7 +61,7 @@ textarea {
     align-items: center;
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    padding: 10px 120px;
+    padding: 10px 200px;
 }
 
 .header {

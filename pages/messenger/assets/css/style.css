@@ -1,158 +1,182 @@
 .container {
     display: flex;
     padding: 0 150px;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
     align-self: stretch;
+    height: calc(100vh - 60px);
 }
 
-.msg-user_block {
+.container-head {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
+    width: 500px;
 }
 
-.msg-usr_item {
+.user-block {
     display: flex;
-    max-width: 500px;
-    padding: 10px 15px;
+    padding: 15px 20px;
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
-    border-radius: 10px;
+    border-radius: 20px;
     background: #FFF;
-    overflow: hidden;
-}
-
-.user-info {
-    display: flex;
-    align-items: flex-start;
     gap: 10px;
-    align-self: stretch;
-}
-
-.logo {
-    width: 90px;
-    height: 90px;
-    background-color: #1F1F1F;
 }
 
 .user-data {
     display: flex;
-    height: 100%;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.user-photo {
+    width: 65px;
+    height: 65px;
+    background-color: #B1B1B1;
+    border-radius: 5px;
+}
+
+.user-info {
+    display: flex;
+    height: 70px;
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
 }
 
-.nameTag_block {
+.nameTag-block {
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
+    align-self: stretch;
 }
 
 .name {
     font-size: 20px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .tag {
     color: rgba(0, 0, 0, 0.80);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .email {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.message {
-    font-size: 14px;
-    font-weight: 500;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    display: -webkit-box;
-}
-
-.msg-user_content {
     display: flex;
-    max-width: 900px;
-    height: 500px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.user-message {
+    display: flex;
+    /*height: 45px;*/
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    align-self: stretch;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: break-spaces;
+}
+
+.container-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+.msg-head {
+    display: flex;
     padding: 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
-    border-radius: 10px;
+    border-radius: 20px;
     background: #FFF;
-}
-
-.msg-content_head {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-}
-
-.msg-usr_info {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
 }
 
 .msg-content {
     display: flex;
+    padding: 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    height: 100%;
     align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+    height: 50%;
 }
 
-.msg-item {
+.message {
+    width: 100%;
     display: flex;
-    padding: 10px;
+    flex-direction: column;
+}
+
+.my-message_block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    justify-content: flex-end;
+
+}
+
+.other-message_block {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.other-message {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
     border-radius: 10px;
     background: #EBEBEB;
+    padding: 10px;
 }
 
-.msg-user_info {
-
-}
-
-.logo {
-
-}
-
-.user-data {
-
-}
-
-.name {
-
-}
-
-.msg-item_content {
-    display: flex;
-    align-items: flex-start;
-
-    gap: 10px;
-    white-space: break-spaces;
-}
-
-.msg-content_footer {
+.my-message {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 10px;
     align-self: stretch;
+    border-radius: 10px;
+}
+
+.msg-footer {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.msg-footer > input {
+    width: 100%;
+    border: none;
+    height: 40px;
 }

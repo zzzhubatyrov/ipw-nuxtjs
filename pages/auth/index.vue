@@ -1,27 +1,29 @@
 <template>
-  <form class="authForm" v-if="isLogin" @submit.prevent="loginHandler">
-    <h1>Авторизация <span>/</span> Регистрация</h1>
-    <input type="email" v-model="email" placeholder="Почта" required>
-    <input type="password" v-model="password" placeholder="Пароль" required>
-    <button class="btn" type="submit">Войти</button>
-    <p>Нет аккаунта?
-      <button class="btn" @click="switchForm">Зарегистрироваться</button>
-    </p>
-  </form>
+  <div class="container">
+    <form class="authForm" v-if="isLogin" @submit.prevent="loginHandler">
+      <h1>Авторизация <span>/</span> Регистрация</h1>
+      <input type="email" v-model="email" placeholder="Почта" required>
+      <input type="password" v-model="password" placeholder="Пароль" required>
+      <button class="btn" type="submit">Войти</button>
+      <p>Нет аккаунта?
+        <button class="btn" @click="switchForm">Зарегистрироваться</button>
+      </p>
+    </form>
 
-  <!-- Форма регистрации -->
-  <form class="authForm" v-else @submit.prevent="registerHandler">
-    <h1>Авторизация <span>/</span> Регистрация</h1>
-    <input type="text" v-model="name" placeholder="Имя / фамилия" required>
-    <input type="email" v-model="email" placeholder="E-mail" required>
-    <input type="password" v-model="password" placeholder="Пароль" required>
-    <input type="password" v-model="repeatPassword" placeholder="Повторите пароль" required>
-    <button class="btn" type="submit">Зарегистрироваться</button>
-    <p>
-      Уже есть аккаунт?
-      <button class="btn" @click="switchForm">Войти</button>
-    </p>
-  </form>
+    <!-- Форма регистрации -->
+    <form class="authForm" v-else @submit.prevent="registerHandler">
+      <h1>Авторизация <span>/</span> Регистрация</h1>
+      <input type="text" v-model="name" placeholder="Имя / фамилия" required>
+      <input type="email" v-model="email" placeholder="E-mail" required>
+      <input type="password" v-model="password" placeholder="Пароль" required>
+      <input type="password" v-model="repeatPassword" placeholder="Повторите пароль" required>
+      <button class="btn" type="submit">Зарегистрироваться</button>
+      <p>
+        Уже есть аккаунт?
+        <button class="btn" @click="switchForm">Войти</button>
+      </p>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +42,7 @@ const router = useRouter()
 const loginHandler = async () => {
   try {
     const response = await axios.post(
-        'http://localhost:5000/auth/v1/login',
+        `http://localhost:5000/auth/v1/login`,
         {
           email: email.value,
           password: password.value
@@ -58,7 +60,7 @@ const loginHandler = async () => {
 const registerHandler = async () => {
   try {
     const response = await axios.post(
-        'http://localhost:5000/auth/v1/register',
+        `http://localhost:5000/auth/v1/register`,
         {
           name: name.value,
           email: email.value,
@@ -76,7 +78,7 @@ const switchForm = () => {
   isLogin.value = !isLogin.value
 }
 onMounted(() => {
-  const isAuth = Cookies.get('ipwCookie')
+  const isAuth = Cookies.get('ipw')
   if (isAuth) {
     router.push('/profile')
   }
@@ -89,6 +91,13 @@ onMounted(() => {
 //text-align: center; font-family: Inter, sans-serif;
   font-style: normal;
   line-height: normal;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 250px);
+  width: 100%;
 }
 
 h1 {

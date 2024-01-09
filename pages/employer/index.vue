@@ -57,7 +57,7 @@ const createCompanyHandler = async () => {
   formData.append("location", companyLocation.value)
   formData.append("description", companyDescription.value)
   try {
-    const res = await axios.post('http://localhost:5000/data/v1/user/create-company',
+    const res = await axios.post(`http://localhost:5000/data/v1/user/create-company`,
       formData, {withCredentials: true, headers: {"Content-Type": "multipart/form-data"}})
     console.log(res)
     router.push('/profile')

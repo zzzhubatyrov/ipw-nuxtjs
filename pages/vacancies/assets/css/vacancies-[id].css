@@ -42,6 +42,7 @@
 }
 
 .name {
+    white-space: nowrap;
     font-size: 24px;
     font-weight: 700;
 }
@@ -52,19 +53,13 @@
     font-weight: 400;
 }
 
-.company-btn_block {
+.about-company_btn {
     display: flex;
     padding: 10px 30px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     background: #4E92F8;
-}
-
-.about-company_btn {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
 }
 
 .main-vacancy {

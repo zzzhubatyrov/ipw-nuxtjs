@@ -46,7 +46,10 @@
               </div>
             </div>
             <div class="createResume-skills_block">
-              <h3 class="createResume-skills_head">Укажите свой стэк</h3>
+              <div class="createResume-skills_head">
+                <h3>Укажите свой стэк</h3>
+                <button class="btn">Взять из профиля</button>
+              </div>
               <div class="createResume-skills_content">
                 <textarea type="text" v-model="skillsValue" class="skillsResume-textarea"></textarea>
               </div>
@@ -57,8 +60,8 @@
         </div>
       </div>
       <div class="createResume-btn_block">
-        <button class="btn" @click="prevStep" :disabled="currentStep === 0">Назад</button>
-        <button class="btn" v-if="currentStep == 0" @click="createResume">Сохранить</button>
+        <button class="btn btn-back" @click="prevStep" :disabled="currentStep === 0">Назад</button>
+        <button class="btn success" v-if="currentStep == 0" @click="createResume">Сохранить</button>
 <!--        :disabled="currentStep === steps.length - 1"-->
       </div>
     </div>
@@ -96,7 +99,7 @@ const createResume = async () => {
   const direction = specializeInput.value.split(" ")[1] + " " + specializeInput.value.split(" ")[2]
   const level = specializeInput.value.split(" ")[0]
   try {
-    const response = axios.post("http://localhost:5000/data/v1/user/create-resume", {
+    const response = axios.post(`http://localhost:5000/data/v1/user/create-resume`, {
       direction: direction,
       level: level,
       salary: salaryInput.value,
@@ -147,5 +150,22 @@ const nextStep = () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.success {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+.btn-back {
+  display: flex;
+  padding: 10px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
 }
 </style>

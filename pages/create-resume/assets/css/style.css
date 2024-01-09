@@ -265,10 +265,12 @@ option {
 
 .createResume-skills_head {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     align-self: stretch;
+}
+
+.createResume-skills_head > h3 {
     font-size: 20px;
     font-weight: 700;
 }
@@ -297,5 +299,9 @@ option {
 }
 
 .createResume-btn_block {
-
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
 }

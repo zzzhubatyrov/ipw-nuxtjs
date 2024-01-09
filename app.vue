@@ -11,7 +11,8 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import ResumeComponent from "~/components/ResumeComponent.vue";
-import VacancyComponent from "~/components/VacancyComponent.vue";
+import VacancyComponent from "~/pages/vacancies/components/VacancyComponent.vue";
+
 export default defineComponent({
   components: {
     ResumeComponent,
@@ -40,10 +41,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  min-height: calc(100vh - 80px);
   margin: 20px 0;
   gap: 35px;
   color: #fff;
+  width: 100%;
 }
 </style>

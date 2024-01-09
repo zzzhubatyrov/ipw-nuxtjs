@@ -16,7 +16,7 @@ export default defineComponent({
     const resumes = ref([]);
     onMounted(async () => {
       try {
-        const response = await axios.get("http://localhost:5000/resume/v1/resumes");
+        const response = await axios.get(`http://localhost:5000/resume/v1/resumes`);
         resumes.value = response.data;
         console.log(resumes.value)
       } catch (error) {
@@ -38,6 +38,7 @@ export default defineComponent({
   align-self: stretch;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: calc(100vh - 20px);
 }
 .r_item {
   display: flex;

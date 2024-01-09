@@ -1,52 +1,19 @@
 <template>
   <div class="container">
-    <div class="resume_block">
-      <div class="resume_header">
-        <div class="resume_header_container">
-          <div class="resume_header_userInfo_block">
-            <div class="resume_user_logo"></div>
-            <div class="resume_user_info">
-              <div class="resume_nameAgeCity_block">
-                <div class="resume_nameTag">
-                  <div class="resume_userName">{{ resume.userName }}</div>
-                  <div class="resume_userTag">{{ resume.userTag }}</div>
-                </div>
-                <div v-if="resume.city === '' || resume.userGender === '' "></div>
-                <div v-else class="resume_ageLocation">
-                  <div class="resume_userAge">{{ resume.userGender }}, {{ resume.userAge }} лет</div>
-                  <div class="resume_userLocation">Город: {{ resume.location }}</div>
-                </div>
-                <div class="resume_status">
-                  не готов к переезду
-                  не готов к командировкам <br>
-                  {{ resume.status }}
-                </div>
-              </div>
-              <div class="resume_user_contacts">
-                <div class="resume_userEmail">{{ resume.userEmail }}</div>
-                <div class="resume_userNumber">{{ resume.userNumber }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="resume_btnBlock">
-            <div class="btn">Скачать CV</div>
-          </div>
+    <div class="container-head">
+    </div>
+    <div class="container-content">
+      <div class="resume">
+        <div class="resume-head">
+          <h3>Резюме</h3>
         </div>
-        <div class="brand">itprofessionalswork</div>
+        <div class="resume-content"></div>
       </div>
-      <div class="resume_second_container">
-        <div class="resume_description">
-          <div class="resume_description_head">Резюме {{ resume.level }} {{ resume.direction }}</div>
-          <div class="resume_description_content">
-            {{ resume.description }}
-          </div>
+      <div class="stack">
+        <div class="stack-head">
+          <h3>Стэк</h3>
         </div>
-        <div class="resume_userStack">
-          <div class="resume_userStack_head">Стэк</div>
-          <div class="resume_userStack_content">
-            {{ resume.skills }}
-          </div>
-        </div>
+        <div class="stack-content"></div>
       </div>
     </div>
   </div>
@@ -55,10 +22,22 @@
 <script lang="ts">
 import {defineComponent, onMounted, ref} from "vue";
 import axios from "axios";
+
+const userData = ref([])
+let Age = ref()
+let currentDate = new Date()
+const showModal = ref(false)
+const usrStack = ref([])
+const openModal = () => {
+  showModal.value = true
+}
+const closeModal = () => {
+  showModal.value = false
+}
 export default defineComponent({
   setup() {
     const {id} = useRoute().params
-    const uri = 'http://localhost:5000/resume/v1/' + id
+    const uri = `http://localhost:5000/resume/v1/` + id
     const resume = ref([])
     onMounted(async () => {
       try {
@@ -69,11 +48,17 @@ export default defineComponent({
         console.log(e)
       }
     })
-    return {resume}
+    return {
+      resume,
+    }
   }
 })
 </script>
 
 <style scoped>
 @import "assets/css/resumeID.css";
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0;
+}
 </style>

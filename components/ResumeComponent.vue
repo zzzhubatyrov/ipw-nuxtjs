@@ -31,5 +31,4 @@ const { resume } = defineProps(['resume'])
 
 <style module>
 @import '@/assets/css/resume.module.css';
-@import 'assets/css/vacancy.module.css';
 </style>
